@@ -1,0 +1,665 @@
+:root {
+    --turquoise: rgb(86, 213, 186);
+    --purple: rgb(136, 141, 235);
+}
+
+@media only screen and (max-width: 560px) {
+    .date {
+        display: none;
+    }
+    #modal {
+        width: 80vw;
+    }
+}
+
+@media only screen and (max-width: 825px) {
+    .side-bar {
+        position: absolute;
+    }
+    .content.content.expanded {
+        grid-column: 2 / 3;
+    }
+    .content.content.narrowed {
+        grid-column: 1 / 3;
+    }
+    .side-bar.side-bar.collapsed { 
+        width: 60px;
+    }
+    .side-bar.side-bar.expanded {
+        width: 275px;
+    }
+    #content {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+/* -- general -- */
+body {
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+#disabled-btn {
+    color: lightgray;
+}
+
+#disabled-btn:hover {
+    cursor: default;
+}
+
+/* -- Header -- */
+
+.header {
+    height: 12vh;
+    width: 100%;
+    background-image: linear-gradient(to right, var(--turquoise), var(--purple));
+    display: flex;
+    font-size: max(45px, 4vw);
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.header p {
+    color: white;
+    margin: 8px;
+}
+
+.head-icon {
+    font-size: max(65px, 5.5vw);
+}
+
+/* -- All content under header -- */
+
+#under-head {
+    height: 88vh;
+    display: grid;
+}
+
+/* -- Sidebar -- */
+
+.side-bar {
+    height: 100%;
+    background-color: rgba(242, 242, 254, 0.9);
+    border-right: solid 1px rgba(136, 141, 235, 0.50);
+    grid-column: 1 / 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#side-bar > #toggle-button:hover {
+    background-color: rgba(146, 148, 168, 0.879);
+}
+
+.side-bar.expanded > #toggle-button {
+    border: none;
+    border-radius: 4px;
+    background-color: rgba(196, 198, 224, 0.7);
+    color: white;
+    font-size: 30px;
+    font-weight: bolder;
+    margin: 12px 12px 0 0;
+    padding: 2px;
+    align-self: flex-end;
+}
+
+.side-bar.collapsed > #toggle-button{
+    border: solid 2px white;
+    border-radius: 4px;
+    background-color: rgba(158, 160, 177, 0.7);
+    color: white;
+    font-size: 40px;
+    font-weight: bolder;
+    margin: 12px;
+    padding: 2px;
+}
+
+.side-bar > .side-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 6px;
+    margin-bottom: 60px;
+    gap: 20px;
+}
+
+.side-bar > .side-content.hide {
+    display: none;
+}
+
+.side-bar > :last-child {
+    border-bottom: solid 1px rgb(155, 155, 155);
+    padding-bottom: 2vw;
+    margin-bottom: 2vw;
+}
+
+.side-content > div {
+    width: 85%;
+    height: 40px;
+    background-color: white;
+    margin-top: 3%;
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    border: solid 1px white;
+    font-size: 20px;
+    text-align: left;
+    color: rgb(98, 98, 98);
+    gap: .5vw;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    white-space: nowrap; 
+}
+
+/* Hover and selection styling for basic nav buttons */
+#side-content-nav > div:hover {
+    cursor: pointer;
+    border: solid 1px var(--purple);
+}
+
+#side-content-nav > .selected {
+    background-color: rgba(213, 215, 254, 0.681);
+    border: solid 1px var(--purple);
+}
+
+/* Hover and selection styling for project buttons (excluding project title div) */
+#side-content-projects > div:not(:first-child):hover {
+    cursor: pointer;
+    border: solid 1px var(--turquoise);
+}
+
+#side-content-projects > .selected {
+    background-color: rgba(189, 253, 239, 0.647);
+    border: solid 1px var(--turquoise);
+}
+
+.nav-icon {
+    margin-left: 1vw;
+    font-size: 30px;
+}
+
+.project-icon {
+    margin-left: 1vw;
+    font-size: 24px;
+}
+
+#projects-title {
+    width: 100%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: solid 1px rgb(155, 155, 155);
+    border-bottom: solid 1px rgb(155, 155, 155);
+    border-right: solid 1px rgba(136, 141, 235, 0.50);
+    padding: 4px 0 4px 0;
+    background: none;
+    border-radius: 0;
+}
+
+#projects-title > p {
+    margin-left: 20px;
+    color: rgb(98, 98, 98);
+    text-align: left;
+    font-size: 24px;
+}
+
+#projects-title > button {
+    margin-right: 20px;
+    background: none;
+    border: none;
+    color: rgb(98, 98, 98);
+    font-size: 32px;
+}
+
+#projects-title > button:hover {
+    color: rgb(137, 136, 136);
+}
+
+/* -- Main Content -- */
+
+.content {
+    background-color: rgb(255, 255, 255);
+    grid-column: 2 / 3;
+    display: flex;
+    flex-direction: column;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 20px;
+}
+
+.heading-container {
+    width: max(98%, 250px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    font-size: 32px;
+    color: rgb(98, 98, 98);
+}
+
+.heading-container p {
+    margin: 10px 0 10px 0;
+}
+
+/* Heading icon */
+.heading-container > :first-child {
+    font-size: 38px;
+}
+
+/* Heading text */
+.heading-container > :nth-child(2) {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* Heading add button */
+.heading-container > button {
+    background: none;
+    border: solid 2px rgb(98, 98, 98);
+    border-radius: 20px;
+    color: rgb(98, 98, 98);
+    font-size: 26px;
+    font-weight: bold;
+    padding: 0;
+}
+
+.heading-container > button:hover {
+    color: rgb(137, 136, 136);
+    border-color: rgb(137, 136, 136);
+}
+
+.sub-heading {
+    font-size: max(15px, 1.35vw);
+    margin: 0 0 25px 0;
+    padding-bottom: 4px;
+    border-bottom: solid 2px rgb(109, 109, 109);
+    color: rgb(98, 98, 98);
+}
+
+/* -- List Items -- */
+.list-item-container {
+    width: max(98%, 250px);
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.list-item {
+    background-color: rgba(227, 228, 250, 0.485);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 2rem;
+    padding: min(.5vw, .5rem);
+    margin-left: min(1vw, 20px);
+    color: rgb(98, 98, 98);
+    font-size: max(12px, 1.20vw);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.list-item > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: min(.5vw, 6px);
+    margin-right: 8px;
+
+}
+
+.priority-status {
+    height: 8px;
+    width: 8px;
+    border-radius: 10px;
+    margin: min(1vw, 15px);
+}
+
+/* Icons of list items, before text starts */
+.list-item > div:first-child > p:first-child {
+    margin: 12px;
+    font-size: max(18px, 1.5vw);
+}
+
+.list-item > div > .check-box:hover {
+    cursor: pointer;
+}
+
+/* List item text content */
+.list-item > div > p:last-of-type {
+    max-width: 20vw;
+    text-align: left;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* Project title button on project list item */
+.list-item > div:first-child > button {
+    padding: 0;
+    max-width: 20vw;
+    font-size: max(12px, 1.20vw);
+    text-align: left;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.date {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-left: 10px;
+    margin-right: 30px;
+}
+
+.date.hide {
+    display: none;
+}
+
+.list-item > :last-child > button:nth-child(2) {
+    margin-left: 10px;
+}
+
+.list-item > div > button {
+    background: none;
+    border: none;
+    font-size: max(18px, 1.5vw);
+    color: rgb(98, 98, 98);
+}
+
+.list-item > div > button:hover {
+    cursor: pointer;
+    color: rgb(152, 202, 169);
+}
+
+.list-item > div > .list-project-btn {
+    font-size: 16px;
+}
+
+.list-item > div > button.list-project-btn:hover {
+    color: black;
+}
+
+.list-item > div > .completed-badge {
+    color: rgb(47, 177, 149);
+    font-size: max(18px, 1.5vw);
+}
+
+.empty-message {
+    width: max(98%, 250px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    font-size: 20px;
+    color: rgb(98, 98, 98);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.empty-message > .project {
+    font-size: 20px;
+    border: solid 1px var(--turquoise);
+    border-radius: 4px;
+    color: rgb(98, 98, 98);
+    padding: 5px 10px;
+    background-color: rgba(110, 243, 214, 0.09);
+    ;
+}
+
+.empty-message > .project:hover {
+    cursor: pointer;
+    background-color: rgba(170, 240, 225, 0.447);
+}
+
+.empty-message > .task {
+    font-size: 20px;
+    border: solid 1px var(--purple);
+    border-radius: 4px;
+    color: rgb(98, 98, 98);
+    padding: 5px 10px;
+    background-color: rgba(180, 183, 249, 0.152);
+}
+
+.empty-message > .task:hover {
+    cursor: pointer;
+    background-color: rgba(170, 173, 241, 0.337);
+}
+
+/* -- This Week Tab -- */
+.days-container {
+    width: max(98%, 250px);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    margin-bottom: 15px;
+    color: rgb(115, 115, 115);
+}
+
+.days-container > div {
+    width: 100%;
+}
+
+.days-container > div > .sub-heading {
+    font-size: max(15px, 1.35vw);
+    padding-bottom: 4px;
+    margin: 0 0 0px 0;
+    border-bottom: solid 1px rgb(152, 152, 152);
+    color: rgb(115, 115, 115);
+}
+
+.days-container > div {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-bottom: 20px;
+}
+
+.days-container > .hide {
+    display: none;
+}
+
+/* -- Custom project tab -- */
+.proj-btn-container {
+    width: max(98%, 250px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.proj-btn-container > button {
+    background: none;
+    width: 38px;
+    height: 38px;
+    border: solid 1px rgb(98, 98, 98);
+    border-radius: 20px;
+    color: rgb(98, 98, 98);
+}
+
+.proj-btn-container >  button:hover {
+    cursor: pointer;
+    background-color: rgba(86, 213, 185, 0.154);
+    border-color: rgb(86, 213, 185);
+}
+
+/* -- Modal -- */
+.modal {
+    position: absolute;
+    height: auto;
+    width: 400px;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    border: solid 2px rgba(98, 98, 98, 0.734);
+    background-color: rgb(255, 255, 255);
+    top: 50%;
+    left: 50%;
+}
+
+.modal.hide {
+    display: none;
+}
+
+.modal > button {
+    align-self: flex-end;
+    border: none;
+    border-radius: 4px;
+    background-color: rgba(208, 210, 236, 0.703);
+    color: white;
+    font-size: 22px;
+    font-weight: bolder;
+    margin: 6px 6px 0 0;
+    padding: 2px;
+}
+
+.modal > button:hover {
+    cursor: pointer;
+    background-color: rgba(196, 198, 224, 0.787)
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    color: rgb(98, 98, 98);
+    font-size: max(12px, 1.20vw);
+    margin: 0px 40px 32px 40px;
+}
+
+.info-priority-div {
+    white-space: nowrap;
+}
+
+.modal-content > p {
+    margin: 0;
+}
+
+.modal-content > p:last-child {
+    white-space: nowrap;
+}
+
+.modal-content > div {
+    display: flex;
+    align-items: center;
+}
+
+.modal-content > .modal-confirm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.modal-confirm > button {
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    font-size: 16px;
+    border-radius: 6px;
+}
+
+.modal-confirm > button:first-child {
+    background-color: rgba(140, 174, 238, 0.709);
+}
+
+.modal-confirm > button:first-child:hover {
+    background-color: rgba(140, 174, 238, 0.85);
+
+}
+
+.modal-confirm > button:last-child {
+    background-color: rgba(132, 213, 202, 0.707);
+}
+
+.modal-confirm > button:last-child:hover {
+    background-color: rgba(132, 213, 202, 0.852);
+}
+
+.modal-content > div > p {
+    margin: 0;
+}
+
+.modal-content > div > .priority-status {
+    margin-left: 10px;
+}
+
+/* -- Modal inputs -- */
+.modal-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-content > h2 {
+    margin: 0;
+}
+
+.input-container > input,
+select,
+input[type="date"] {
+    height: 20px;
+    width: 150px;
+    font-size: 15px;
+    border: solid 1px rgb(82, 81, 155);
+    border-radius: 4px;
+    color: rgb(98, 98, 98);
+    margin-bottom: 12px;
+}
+
+.input-container > input:focus,
+select:focus,
+input[type="date"]:focus {
+    outline: solid 1px rgba(118, 233, 195, 0.795);
+}
+
+.input-container>input::placeholder {
+    color: rgba(150, 150, 150, 0.682);
+}
+
+.modal-form > .input-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-size: 12px;
+    color: rgb(98, 98, 98);
+}
+
+.modal-form > button {
+    height: 30px;
+    width: 80px;
+    padding: 6px 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    color: rgb(255, 255, 255);
+    background-color: rgba(70, 174, 212, 0.816);
+    margin-bottom: 12px;
+}
+
+.error.hide {
+    display: none
+}
+
+.error.show {
+    margin: 0 0 6px 0;
+    font-size: 12px;
+    color: rgb(220, 37, 37);
+}
