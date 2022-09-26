@@ -2,9 +2,9 @@
 
 A dynamically rendered To-do List created with vanilla Javascript.
 
-👉 Check it out [here] (...)
+👉 Check it out [here](https://jmarti71.github.io/todo-list/).
 
-Project prompt page [here] (https://www.theodinproject.com/lessons/javascript-todo-list) 📝 
+Project prompt page [here](https://www.theodinproject.com/lessons/javascript-todo-list) 📝 
 
 ## Overview
 
@@ -25,8 +25,8 @@ Project prompt page [here] (https://www.theodinproject.com/lessons/javascript-to
 - Terminal (MacOS)
 
 **Third Party Resources:**
-- [Google Icons] (https://fonts.google.com/icons)
-- [date-fns Library] (https://date-fns.org/)
+- [Google Icons](https://fonts.google.com/icons)
+- [date-fns Library](https://date-fns.org/)
 
 **Development:**
 - Used CSS Flexbox and CSS Grid for layout
