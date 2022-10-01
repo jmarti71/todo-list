@@ -4,7 +4,7 @@ A dynamically rendered To-do List created with vanilla Javascript.
 
 👉 Check it out [here](https://jmarti71.github.io/todo-list/).
 
-Project prompt page [here](https://www.theodinproject.com/lessons/javascript-todo-list) 📝 
+Project instructions [here](https://www.theodinproject.com/lessons/javascript-todo-list) 📝 
 
 ## Overview
 
@@ -20,6 +20,8 @@ Project prompt page [here](https://www.theodinproject.com/lessons/javascript-tod
 
 **Tools used:**
 - Visual studio code
+- ESLint
+- Prettier
 - Webpack Module Bundler
 - Git + GitHub
 - Terminal (MacOS)
@@ -33,5 +35,3 @@ Project prompt page [here](https://www.theodinproject.com/lessons/javascript-tod
 - Implemented JavaScript revealing module and factory patterns for code organization.
 - Created with a focus on responsive design and mobile compatibility.
 - Data saving to localStorage.
-
-
