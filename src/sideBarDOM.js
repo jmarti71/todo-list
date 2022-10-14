@@ -35,13 +35,14 @@ const sideBar = (sidebar) => {
     }
   }
 
-  window.addEventListener("resize", () => {
-    if (window.innerWidth <= 825) {
-      collapseSideBar();
-    } else if (window.innerWidth >= 825) {
-      _expandSideBar();
-    }
-  });
+  // COMMENTED OUT FOR MOBILE TESTING
+  // window.addEventListener("resize", () => {
+  //   if (window.innerWidth <= 825) {
+  //     collapseSideBar();
+  //   } else if (window.innerWidth >= 825) {
+  //     _expandSideBar();
+  //   }
+  // });
 
   function collapseSideBar() {
     const toHide = document.querySelectorAll(".side-content");
@@ -65,7 +66,7 @@ const sideBar = (sidebar) => {
     pageRef.content.className = "content narrowed";
   }
 
-  const _renderSideBarNavButtons = () => {
+  function _renderSideBarNavButtons () {
     const sideBtns = ["Home", "Today", "This Week"];
     const icons = ["home", "today", "date_range"];
     const pages = [loadHomePage, loadToday, loadWeek];
