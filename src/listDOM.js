@@ -27,7 +27,7 @@ const renderListItems = (element, appendTo) => {
     };
   };
 
-  const _updateTaskCompletion = (element) => {
+  function _updateTaskCompletion (element) {
     const generalList = getGeneralProject();
     const customProjects = getCustomProjects();
     if (projectSelected(document.querySelector(".selected").id)) {
@@ -53,7 +53,7 @@ const renderListItems = (element, appendTo) => {
     }
   };
 
-  const _toggleCompleted = (element, checkBox, title) => {
+  function _toggleCompleted (element, checkBox, title) {
     if (element.completed === true) {
       element.completed = false;
       checkBox.textContent = "check_box_outline_blank";
@@ -70,7 +70,7 @@ const renderListItems = (element, appendTo) => {
     }
   };
 
-  const _renderTasksLeftContent = (appendTo) => {
+  function _renderTasksLeftContent (appendTo) {
     appendTo.className = "task__left-content";
     const checkBox = document.createElement("p");
     checkBox.className = "material-symbols-outlined check-box";
@@ -103,7 +103,7 @@ const renderListItems = (element, appendTo) => {
     appendTo.append(checkBox, title, priorityIndicator);
   };
 
-  const _renderRightContent = (appendTo) => {
+  function _renderRightContent (appendTo) {
     appendTo.className = "list-item-content__right";
     const itemBtns = ["info", "edit", "delete"];
     const btnTitles = ["Details", "Edit", "Delete"];
@@ -154,7 +154,7 @@ const renderListItems = (element, appendTo) => {
     }
   };
 
-  const _renderProjectLeftContent = (appendTo) => {
+  function _renderProjectLeftContent (appendTo) {
     appendTo.className = "project__left-content";
     const projBadge = document.createElement("p");
     projBadge.className = "material-symbols-outlined";
@@ -176,13 +176,13 @@ const renderListItems = (element, appendTo) => {
     }
   };
 
-  const renderTasks = () => {
+  function renderTasks () {
     const container = _renderTaskContainers();
     _renderTasksLeftContent(container.Left);
     _renderRightContent(container.Right);
   };
 
-  const renderProjectstoList = () => {
+  function renderProjectstoList () {
     const container = _renderTaskContainers();
     _renderProjectLeftContent(container.Left);
     _renderRightContent(container.Right);
