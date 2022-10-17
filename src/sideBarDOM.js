@@ -35,14 +35,16 @@ const sideBar = (sidebar) => {
     }
   }
 
-  // COMMENTED OUT FOR MOBILE TESTING
-  // window.addEventListener("resize", () => {
-  //   if (window.innerWidth <= 825) {
-  //     collapseSideBar();
-  //   } else if (window.innerWidth >= 825) {
-  //     _expandSideBar();
-  //   }
-  // });
+  // Auto collapse/expand side bar when resizing if not mobile device (detected based on touch input)
+  window.addEventListener("resize", () => {
+    if (!("ontouchstart" in document.documentElement)) {
+      if (window.innerWidth <= 825) {
+        collapseSideBar();
+      } else if (window.innerWidth >= 825) {
+        _expandSideBar();
+      }
+    }
+  });
 
   function collapseSideBar() {
     const toHide = document.querySelectorAll(".side-content");
@@ -66,7 +68,7 @@ const sideBar = (sidebar) => {
     pageRef.content.className = "content narrowed";
   }
 
-  function _renderSideBarNavButtons () {
+  function _renderSideBarNavButtons() {
     const sideBtns = ["Home", "Today", "This Week"];
     const icons = ["home", "today", "date_range"];
     const pages = [loadHomePage, loadToday, loadWeek];
@@ -120,6 +122,7 @@ function renderSideBarProjects(sidebar) {
   } else if (projects.length > 0) {
     for (let i = 0; i < projects.length; i++) {
       const projDiv = document.createElement("div");
+      projDiv.dataset.projectTitle = projects[i].title;
       projDiv.id = projects[i].title;
       projcontainer.appendChild(projDiv);
       const projIcon = document.createElement("p");
