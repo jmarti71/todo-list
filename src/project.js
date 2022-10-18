@@ -50,7 +50,8 @@ function loadProject(selectedProject, content) {
   renderprojectButtons(selectedProject, content);
   renderSubHeading("Tasks", selectedProject.tasks.length, content);
   loadContent("task-list", selectedProject.tasks, content);
-  selectTab(document.getElementById(selectedProject.title));
+  //selectTab(document.getElementById(selectedProject.title));
+  selectTab(document.querySelector(`[data-project-title= '${selectedProject.title}']`));
 }
 
 export { loadProject };

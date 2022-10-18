@@ -129,13 +129,13 @@ function findCurrentTab() {
   const currentTab = document.querySelector(".selected");
   return currentTab;
 }
-
+ 
 // Check if current selected tab is a project
 function projectSelected(id) {
-  if (id === "Home" || id === "Today" || id === "This Week") {
-    return false;
-  } else {
+  if (id === 'project') {
     return true;
+  } else {
+    return false;
   }
 }
 
@@ -147,11 +147,11 @@ function isProject(element) {
     return false;
   }
 }
-
+ 
 // Return the parent project of a task
 function getTaskProject() {
   const projects = getCustomProjects();
-  const parentTitle = findCurrentTab().id;
+  const parentTitle = findCurrentTab().dataset.projectTitle;
   for (let i = 0; i < projects.length; i++) {
     if (projects[i].title === parentTitle) {
       return projects[i];
@@ -207,7 +207,7 @@ function updateCurrentTab(element = "none") {
       loadWeek(pageRef.content);
       break;
     // If editing selected project
-    case selectedTab.id === element.title:
+    case selectedTab.dataset.projectTitle === element.title:
       removeContent(pageRef.content);
       loadProject(element, pageRef.content);
       break;
@@ -222,17 +222,27 @@ function updateCurrentTab(element = "none") {
 
 // Re-renders sidebar projects and tracks if a sidebar project is selected
 function updateSideBar(editedElementSelected = "none") {
-  const currentTabID = findCurrentTab().id;
+  // Get selected tab
+  const currentTab = findCurrentTab();
+
+  // Remove list of projects from sidebar
   pageRef.sideBar.removeChild(pageRef.sideBar.lastChild);
+
+  // Re-render selected projects
   renderSideBarProjects(pageRef.sideBar);
-  // If current tab is a project
-  if (projectSelected(currentTabID)) {
+
+  // If sidebar is collapsed, hide selection (maintains selection status)
+  if(pageRef.sideBar.className == "side-bar collapsed") {
+    sideBar(pageRef.sideBar).collapseSideBar();
+  }
+
+  // If current tab is a project, set class name back to selected after removing and re-adding elements.
+  if (projectSelected(currentTab.id)) {
     editedElementSelected === "none"
       ? // If sidebar was updated and the modified/added element was not selected, i.e. adding new project, while another was selected
-        (document.getElementById(currentTabID).className = "selected")
+        (document.querySelector(`[data-project-title= '${currentTab.dataset.projectTitle}']`).className = "selected")
       : // If sidebar was updated and the modified element was selected, i.e. editing the name of a currently selected project
-        (document.getElementById(editedElementSelected.title).className =
-          "selected");
+        (document.querySelector(`[data-project-title= '${editedElementSelected.title}']`).className = "selected");
   }
 }
 

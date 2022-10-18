@@ -123,7 +123,7 @@ function renderSideBarProjects(sidebar) {
     for (let i = 0; i < projects.length; i++) {
       const projDiv = document.createElement("div");
       projDiv.dataset.projectTitle = projects[i].title;
-      projDiv.id = projects[i].title;
+      projDiv.id = 'project';
       projcontainer.appendChild(projDiv);
       const projIcon = document.createElement("p");
       projIcon.className = "material-symbols-outlined project-icon";
