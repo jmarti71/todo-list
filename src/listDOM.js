@@ -3,6 +3,7 @@ import {
   removeContent,
   getTaskProject,
   projectSelected,
+  updateSideBar
 } from "./manageDOM";
 import { modalManager } from "./modalDOM";
 import { pageRef } from "./index";
@@ -43,6 +44,8 @@ const renderListItems = (element, appendTo) => {
         project
       );
       localStorage.setItem("customProjects", JSON.stringify(customProjects));
+      // Below keeps sidebar up-to-date if task completion within a project is modified and the project was not accessed from the sidebar.
+      updateSideBar();  
     } else {
       generalList.tasks.splice(
         findElemIndexByTitle(generalList.tasks, element.title),

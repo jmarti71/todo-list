@@ -109,6 +109,7 @@ function updateDOM(element, afterEvent) {
       updateCurrentTab();
       break;
     case "edit-task":
+      updateSideBar();
       updateCurrentTab(element);
       break;
     case "new-project":
@@ -116,6 +117,7 @@ function updateDOM(element, afterEvent) {
       updateCurrentTab(element);
       break;
     case "add-task-to-project":
+      updateSideBar();
       updateCurrentTab(element);
       break;
     case "edit-project":
